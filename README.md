@@ -86,7 +86,7 @@ integrators full transparency into every decision.
 ### Docker (recommended)
 
 ```bash
-git clone https://github.com/AXrodriguezQ/OMSP.git
+git clone https://github.com/BorisKriuk/omsp.git
 cd omsp
 docker compose up -d
 ```
