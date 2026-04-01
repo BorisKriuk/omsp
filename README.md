@@ -1,4 +1,10 @@
-# OMSP — Open Messenger Safety Protocol
+# 🛡️ OMSP — Open Messenger Safety Protocol
+
+<p align="center">
+  <em>🔒 Safety without surveillance. Classification without compromise.</em>
+</p>
+
+---
 
 OMSP is an open, auditable protocol for detecting harmful content in messaging
 platforms **without breaking end-to-end encryption**. The safety classifier
@@ -12,29 +18,32 @@ CPU-friendly safety API using a hybrid keyword + zero-shot NLI pipeline.
 It requires no external API keys and returns structured risk assessments
 in a single JSON response.
 
-## Design Philosophy
+---
+
+## 🧭 Design Philosophy
 
 Previous attempts at client-side safety (such as Apple's CSAM scanning) failed
 because they were proprietary, centralized hash reporting, and lacked public
 accountability. OMSP addresses all three failures:
 
-1. **The data never moves.** Classification happens entirely on-device or on the
+1. **🔐 The data never moves.** Classification happens entirely on-device or on the
    platform's local node. Message content is never transmitted to any external
    server, government, or third party.
 
-2. **Detection rules are open source and human-readable.** Anyone can verify
+2. **📖 Detection rules are open source and human-readable.** Anyone can verify
    that no one has inserted "flag political dissent" into the keyword lists.
    Threat definitions are transparent, auditable, and versioned.
 
-3. **Alerts, not wiretaps.** What leaves the device — periodically, not in
+3. **🔔 Alerts, not wiretaps.** What leaves the device — periodically, not in
    real-time — is an anonymized statistical signal: a user hash triggered a
    specific classifier at a given confidence level, with an escalation pattern
    detected. No message content. No identifying information. Just a lead.
    Governments can investigate through legal channels, warrants, and courts.
 
-The periodic reporting delay is deliberate and philosophically significant:
-real-time reporting is surveillance; periodic aggregated alerts are safety
-reporting, closer to how a human moderator would flag concerns.
+> 💡 The periodic reporting delay is deliberate and philosophically significant:
+> real-time reporting is surveillance; periodic aggregated alerts are safety
+> reporting, closer to how a human moderator would flag concerns.
+
 
 ## Threat Categories
 
