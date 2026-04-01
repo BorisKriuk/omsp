@@ -20,7 +20,7 @@ in a single JSON response.
 
 ---
 
-## 🧭 Design Philosophy
+## 🧭 Design Philosophy - Now Proof Of Concept
 
 Previous attempts at client-side safety (such as Apple's CSAM scanning) failed
 because they were proprietary, centralized hash reporting, and lacked public
