@@ -14,7 +14,7 @@ completely intact. The safety layer sits *inside* the endpoint, not between
 endpoints.
 
 This repository contains the reference implementation: a self-hosted,
-CPU-friendly safety API using a hybrid keyword + zero-shot NLI pipeline.
+CPU-friendly safety API using a hybrid pipeline.
 It requires no external API keys and returns structured risk assessments
 in a single JSON response.
 
