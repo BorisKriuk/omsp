@@ -13,7 +13,7 @@ We take security issues seriously. If you discover a security vulnerability, **p
 
 Instead, report it responsibly through one of these channels:
 
-- **Email:** security@YOUR_DOMAIN.com
+- **Email:** kriuk.boris@gmail.com
 - **GitHub Private Advisory:** [Create a private security advisory](../../security/advisories/new)
 
 ### What to Include
