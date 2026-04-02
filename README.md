@@ -1,4 +1,4 @@
-# 🛡️ OMSP — Open Messenger Safety Protocol
+# 🛡️ OMSP — Open Moderation(Messenger) Safety Protocol
 
 <p align="center">
   <em>🔒 Safety without surveillance. Classification without compromise.</em>
