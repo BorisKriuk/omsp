@@ -49,12 +49,12 @@ accountability. OMSP addresses all three failures:
 
 | Category           | Description                                                        |
 |--------------------|--------------------------------------------------------------------|
-| **Terrorist**      | Violent attacks, weapons, covert operational planning               |
-| **Radicalization** | Extremist rhetoric, supremacist content, dehumanization             |
-| **Fraud**          | Scams, phishing, financial manipulation                             |
-| **Grooming**       | Adult manipulation of minors, inappropriate trust-building          |
-| **Self-Harm**      | Suicidal ideation, self-injury, expressions of hopelessness         |
-| **Spam**           | Unsolicited commercial content, link farming                        |
+| **Terrorist**      | Violent attacks, weapons, covert operational planning              |
+| **Radicalization** | Extremist rhetoric, supremacist content, dehumanization            |
+| **Fraud**          | Scams, phishing, financial manipulation                            |
+| **Grooming**       | Adult manipulation of minors, inappropriate trust-building         |
+| **Self-Harm**      | Suicidal ideation, self-injury, expressions of hopelessness        |
+| **Spam**           | Unsolicited commercial content, link farming                       |
 
 ## How It Works
 
@@ -129,12 +129,12 @@ Process a single message locally.
 }
 ```
 
-| Field         | Type   | Required | Description                                     |
-|---------------|--------|----------|-------------------------------------------------|
-| `chat_id`     | string | yes      | Conversation identifier                          |
+| Field         | Type   | Required | Description                                           |
+|---------------|--------|----------|-------------------------------------------------------|
+| `chat_id`     | string | yes      | Conversation identifier                               |
 | `user_id`     | string | yes      | User identifier (hashed internally, never stored raw) |
-| `user_status` | int    | yes      | Application-defined user status code             |
-| `message`     | string | yes      | Message text (max 10,000 chars by default)       |
+| `user_status` | int    | yes      | Application-defined user status code                  |
+| `message`     | string | yes      | Message text (max 10,000 chars by default)            |
 
 **Response:**
 
@@ -206,15 +206,15 @@ All configuration is via environment variables. Defaults are production-ready.
 | `OMSP_PORT`               | `80`                                                | HTTP listen port                         |
 | `OMSP_WORKERS`            | `2`                                                 | Gunicorn worker count                    |
 | `OMSP_LOG_LEVEL`          | `INFO`                                              | Log verbosity                            |
-| `OMSP_SALT`               | *(random per boot)*                                 | HMAC salt for user/chat ID anonymization. Set for persistence across restarts. |
+| `OMSP_SALT`               | *(random per boot)*                                 | HMAC salt for user/chat ID anonymization |
 | `OMSP_ENCODER_MODEL`      | `MoritzLaurer/deberta-v3-large-zeroshot-v2.0`       | Hugging Face model name                  |
 | `OMSP_ENCODER_DEVICE`     | `cpu`                                               | Inference device (`cpu` or `cuda`)       |
 | `OMSP_ENCODER_ENABLED`    | `true`                                              | Set `false` for keyword-only mode        |
 | `OMSP_MAX_MESSAGE_LENGTH` | `10000`                                             | Maximum input message length (chars)     |
 | `OMSP_MAX_ALERTS`         | `10000`                                             | Maximum alerts held in memory            |
-| `OMSP_PROFILE_DECAY`      | `0.15`                                              | Exponential decay factor for profile dimensions |
+| `OMSP_PROFILE_DECAY`      | `0.15`                                              | Exponential decay factor for prof. dims  |
 | `OMSP_ALERT_THRESHOLD`    | `0.5`                                               | Global alert threshold                   |
-| `OMSP_REPORT_INTERVAL`    | `43200`                                             | Alert reporting interval in seconds (default: 12 hours) |
+| `OMSP_REPORT_INTERVAL`    | `43200`                                             | Alert reporting interval in seconds      |
 | `OMSP_DEBUG`              | `false`                                             | Enable Flask debug mode                  |
 
 ## Memory & Scaling
@@ -250,7 +250,7 @@ machines with limited RAM.
 │       │                              │                  │        │
 │       ▼                              ▼                  ▼        │
 │  Anonymizer               ClassifierRegistry        Profiler     │
-│  (HMAC-SHA256)            │                    (behavioural dims  │
+│  (HMAC-SHA256)            │                    (behavioural dims │
 │                           ├─ TerroristClassifier  + exp. decay)  │
 │                           ├─ RadicalizationClassifier            │
 │                           ├─ FraudClassifier                     │
@@ -260,24 +260,24 @@ machines with limited RAM.
 │                                │                                 │
 │                      ┌─────────┴─────────┐                       │
 │                      │                   │                       │
-│                Tier 1: Keywords    Tier 2: NLI Encoder            │
+│                Tier 1: Keywords    Tier 2: NLI Encoder           │
 │                + obfuscation       (DeBERTa, local)              │
 │                      │                   │                       │
 │                      └─────────┬─────────┘                       │
 │                                │                                 │
 │                                ▼                                 │
-│                     Local MemoryStore                             │
-│                    (alerts + profiles)                            │
+│                     Local MemoryStore                            │
+│                    (alerts + profiles)                           │
 │                         │                                        │
-│                         ▼ (periodic, anonymized)                  │
-│              ┌─────────────────────┐                              │
-│              │  Anonymized Alert   │                              │
-│              │  { user_hash,       │                              │
-│              │    classifier,      │                              │
-│              │    confidence,      │                              │
-│              │    escalation }     │                              │
-│              │  NO message content │                              │
-│              └────────┬────────────┘                              │
+│                         ▼ (periodic, anonymized)                 │
+│              ┌─────────────────────┐                             │
+│              │  Anonymized Alert   │                             │
+│              │  { user_hash,       │                             │
+│              │    classifier,      │                             │
+│              │    confidence,      │                             │
+│              │    escalation }     │                             │
+│              │  NO message content │                             │
+│              └────────┬────────────┘                             │
 │                       │                                          │
 └───────────────────────┼──────────────────────────────────────────┘
                         │ every 12 hours
